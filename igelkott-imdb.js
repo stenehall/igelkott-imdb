@@ -2,7 +2,7 @@ var http = require('http'),
 url = require('url');
 
 var Imdb = function Imdb() {
-  this.listeners = {'PRIVMSG': this.imdb, 'imdb:success': this.success, 'imdb:false': this._false};
+  this.listeners = {'trigger:imdb': this.imdb, 'imdb:success': this.success, 'imdb:false': this._false};
 
   this.name = 'imdb';
   this.help = {
