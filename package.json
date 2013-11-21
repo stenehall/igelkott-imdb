@@ -1,7 +1,7 @@
 {
   "name": "igelkott-imdb",
   "description": "A very simple imdb plugin for Igelkott",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "igelkott-imdb.js",
   "dependencies": { },
   "devDependencies": {
