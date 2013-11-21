@@ -1,9 +1,9 @@
 var assert = require('chai').assert,
-Stream = require('stream'),
-nock = require('nock'),
+    Stream = require('stream'),
+    nock = require('nock'),
 
-Igelkott = require('igelkott'),
-Imdb = require('../igelkott-imdb.js').Plugin;
+    Igelkott = require('igelkott'),
+    Imdb = require('../igelkott-imdb.js').Plugin;
 
 
 describe('Imdb', function() {
@@ -20,7 +20,8 @@ describe('Imdb', function() {
       "server": {
         "nick": "igelkott",
       },
-      plugins:['privmsg'],
+      core:['privmsg'],
+      plugins: {},
       'adapter': s, 'connect': function() { this.server.emit('connect'); }
     };
 
@@ -30,7 +31,7 @@ describe('Imdb', function() {
 
   it('Should not respond at all on no match', function(done) {
     this.timeout(5000); // API queries are slow
-    igelkott.plugin.load('imdb', Imdb);
+    igelkott.plugin.load('imdb', {}, Imdb);
 
     igelkott.on('imdb:false', function() {
       done();
@@ -42,7 +43,7 @@ describe('Imdb', function() {
 
 
   it('Should respond with plot and rating', function(done) {
-    igelkott.plugin.load('imdb', Imdb);
+    igelkott.plugin.load('imdb', {}, Imdb);
 
     s.on('data', function(data) {
       if (data == "PRIVMSG ##botbotbot :dsmith: This is a description. (10.0)\r\n")
@@ -62,7 +63,7 @@ describe('Imdb', function() {
 
   it('Should get a response containing both plot and imdbRating (make sure the api haven\'t been updated)', function(done) {
     this.timeout(5000); // API queries are slow
-    igelkott.plugin.load('imdb', Imdb);
+    igelkott.plugin.load('imdb', {}, Imdb);
 
     igelkott.on('imdb:success', function(message, data) {
       assert.typeOf(data, 'object');
